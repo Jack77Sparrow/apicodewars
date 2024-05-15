@@ -4,6 +4,11 @@ import pprint
 from users import all_users
 from tabulate import tabulate
 import matplotlib.pyplot as plt
+from tkinter import ttk
+
+
+
+
 def users(username):
     request = requests.get(f"https://www.codewars.com/api/v1/users/{username}")
 
@@ -17,7 +22,7 @@ def users(username):
 
 user_info = []
 
-for user in all_users[:5]:
+for user in all_users[:10]:
     # print(user)
     link = users(user)
     
@@ -66,23 +71,27 @@ headers = ["Username", "Honor", "Clan", "Leaderboard Position"]
 print(tabulate(table_data, headers=headers, tablefmt="pretty"))
 
 
-usernames = [user['username'] for user in user_info]
-honors = [user['honor'] for user in user_info]
+
+def plt_show(some):
+    usernames = [user['username'] for user in user_info]
+    honors = [user['honor'] for user in user_info]
 
 
-languages = [user["ranks"]["languages"]["python"]["score"] for user in user_info]
-print(languages)
-plt.style.use("ggplot")
+    languages = [user["ranks"]["languages"][some]["score"] for user in user_info]
+    print(languages)
+    plt.style.use("ggplot")
+    
 
-# Построение графика
-plt.figure(figsize=(10, 5))
-plt.bar(usernames, languages, color='blue')
-plt.xlabel('Usernames')
-plt.ylabel('Honor Points')
-plt.title('Honor Points of Codewars Users')
-plt.xticks(rotation=90)
-plt.tight_layout()
+    # Построение графика
+    plt.figure(figsize=(10, 5))
+    plt.bar(usernames, languages, color='blue')
+    plt.xlabel('Usernames')
+    plt.ylabel('Honor Points')
+    plt.title('Honor Points of Codewars Users')
+    plt.xticks(rotation=90)
+    plt.tight_layout()
 
 
-plt.show()
+    plt.show()
+
 
