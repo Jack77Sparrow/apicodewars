@@ -22,7 +22,7 @@ def users(username):
 
 user_info = []
 
-for user in all_users[:10]:
+for user in all_users[:3]:
     # print(user)
     link = users(user)
     
@@ -35,25 +35,52 @@ def load_info(user_info):
         # json.loads(file)
     
 load_info(user_info)
-
-def get_info():
+def json_info(name = None):
     with open("/Users/drake/Desktop/vscode/parsing/data.json", 'r') as file:
-
+        
         info = json.load(file)
+        
+        return info
+def get_info():
+    info = json_info()
     
     for item in info:
 
-        print(f"{item["username"]} has a {item["ranks"]["overall"]["score"]} points")
+        # print(f"{item["username"]} has a {item["ranks"]["overall"]["score"]} points")
 
-        print(f"\tHis leader position -> {item["leaderboardPosition"]}")
-        print(f"\tHis honor -> {item["honor"]}\n")
+        # print(f"\tHis leader position -> {item["leaderboardPosition"]}")
+        # print(f"\tHis honor -> {item["honor"]}\n")
         languages = list(item["ranks"]["languages"].keys())
 
         for language in languages:
 
-            print(f"{language} {item["ranks"]["languages"][language]["score"]}")
+            try:
+                
+                # print(f"{language} {item["ranks"]["languages"]["python"]["score"]}")
+                pass
+            except KeyError:
+                # print(f"{item["username"]} dont lear python")
+                continue
 
-get_info()
+# get_info()
+
+
+def get_user_info(name):
+    user_n = users(name)
+    languages = user_n["ranks"]["languages"].keys()
+    score = []
+    for languag in languages:
+        score.append(user_n["ranks"]["languages"][languag]["score"])
+    
+
+    return languages, score
+    
+
+
+    
+
+print(get_user_info("g964"))
+
 
 table_data = []
 for user in user_info:
@@ -68,8 +95,29 @@ for user in user_info:
 headers = ["Username", "Honor", "Clan", "Leaderboard Position"]
 
 # Выводим таблицу
-print(tabulate(table_data, headers=headers, tablefmt="pretty"))
+# print(tabulate(table_data, headers=headers, tablefmt="pretty"))
 
+
+def plt_one_user(name):
+    language_user = get_user_info(name)
+    
+
+
+
+    plt.style.use("ggplot")
+    
+
+    # Построение графика
+    plt.figure(figsize=(10, 5))
+    plt.bar(language_user[0], language_user[1], color='blue')
+    plt.xlabel('Usernames')
+    plt.ylabel('Honor Points')
+    plt.title('Honor Points of Codewars Users')
+    plt.xticks(rotation=90)
+    plt.tight_layout()
+
+
+    plt.show()
 
 
 def plt_show(some):
@@ -78,7 +126,7 @@ def plt_show(some):
 
 
     languages = [user["ranks"]["languages"][some]["score"] for user in user_info]
-    print(languages)
+    # print(languages)
     plt.style.use("ggplot")
     
 
