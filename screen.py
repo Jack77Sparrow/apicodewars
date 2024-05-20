@@ -16,6 +16,12 @@ def button_2_click():
     plt_one_user(inp1)
 
 
+
+
+
+# def button_3_click():
+#     some(person1.get(), person2.get())
+
 button_names = list(common_languages)
 root.title("Graphic Interface")
 
@@ -34,6 +40,14 @@ text.place(relx=0.5, rely=0.2, relwidth=0.3, relheight=0.1, anchor="center")
 login_input = Entry(frame, bg="white", fg="black")
 login_input.place(relx=0.3, rely=0.4, relwidth=0.4, relheight=0.05)
 
+
+person1 = Entry(frame, bg="blue", fg="black", textvariable="person 1")
+person1.place(relx=0.3, rely=0.35, relwidth=0.4, relheight=0.05)
+
+
+
+# button_enter2 = Button(frame, bg="gray", fg = "white", command=button_3_click)
+# button_enter2.place(relx=0.5, rely=0.6, relwidth=0.3, relheight=0.05, anchor="center")
 
 button_enter = Button(frame, bg="gray", fg = "white", command=button_2_click)
 button_enter.place(relx=0.5, rely=0.47, relwidth=0.3, relheight=0.05, anchor="center")

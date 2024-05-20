@@ -3,6 +3,7 @@ import pprint
 from bs4 import BeautifulSoup
 
 
+
 request = requests.get("https://www.codewars.com/users/leaderboard")
 parse = BeautifulSoup(request.text, "html.parser")
 
@@ -18,7 +19,7 @@ for user in users:
         # print(name.text)
     
 # print(all_users)
-        
+
 count_of_users = 1
 for use in all_users:
     # print(f"positions of {use} is {count_of_users}")

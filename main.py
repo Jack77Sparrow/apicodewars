@@ -9,6 +9,10 @@ from tkinter import ttk
 
 
 
+
+
+
+
 def users(username):
     request = requests.get(f"https://www.codewars.com/api/v1/users/{username}")
 
@@ -19,7 +23,11 @@ def users(username):
         return None
 # pprint.pprint(data)
     
+# all_users = ["ernest2006pro", "Jack777Sparrow"]
 
+
+    
+# all_users = sorted(all_users)
 user_info = []
 
 for user in all_users[:3]:
@@ -28,9 +36,13 @@ for user in all_users[:3]:
     
     if link:
         user_info.append(link)
+
+
+
+
 def load_info(user_info):
     with open("/Users/drake/Desktop/vscode/parsing/data.json", 'w') as file:
-
+        
         json.dump(user_info, file, indent=4)
         # json.loads(file)
     
@@ -122,7 +134,7 @@ def plt_one_user(name):
 
 def plt_show(some):
     usernames = [user['username'] for user in user_info]
-    honors = [user['honor'] for user in user_info]
+    # honors = [user['honor'] for user in user_info]
 
 
     languages = [user["ranks"]["languages"][some]["score"] for user in user_info]
