@@ -29,16 +29,17 @@ def users(username):
     
 # all_users = sorted(all_users)
 user_info = []
-
+usersi = []
 for user in all_users[:3]:
     # print(user)
     link = users(user)
+    usersi.append(user)
     
     if link:
         user_info.append(link)
 
 
-
+print(usersi)
 
 def load_info(user_info):
     with open("/Users/drake/Desktop/vscode/parsing/data.json", 'w') as file:
